@@ -33,10 +33,7 @@ if (process.env.NODE_ENV == 'production') {
   app.use(session({
     secret: 'testSession',
     resave: false,
-    saveUninitialized: false,
-    store: new mongoStore({
-      mongooseConnection: mongoose.connection
-    })
+    saveUninitialized: false
   }));
 } else {
   app.use(session({
