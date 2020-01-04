@@ -5,7 +5,7 @@ var passport = require('passport');
 var bcrypt = require('bcrypt');
 
 // Get Users model
-var User = require('../models/user_model');
+var User = require('../Models/user_model');
 var page_model = require('../Models/page_model');
 var category_model = require('../Models/category_model');
 
