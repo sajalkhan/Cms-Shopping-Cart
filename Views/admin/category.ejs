@@ -1,0 +1,27 @@
+<%- include('../_layouts/adminHeader') %>
+
+<h2 class="page-title">Category</h2>
+<a href="/admin/category/addCategory" class="btn btn-primary">Add a new category</a>
+<br><br>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% for(var ct of category){ %>
+        <tr>
+            <td><%= ct.title %></td>
+            <td><a href="/admin/category/EditCategory/<%= ct.id %>">Edit</a></td>
+            <td><a href="/admin/category/DeleteCategory/<%= ct.id %>">Delete</a></td>
+        </tr>
+        <% }%>
+    </tbody>
+</table>
+
+<%- include('../_layouts/adminFooter') %>

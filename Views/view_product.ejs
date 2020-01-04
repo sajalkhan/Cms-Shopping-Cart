@@ -1,0 +1,16 @@
+<% include _layouts/header %>
+
+    <% for(var p of product) {%>
+        <div class="card" style="float: left;margin: 20px;">
+            <div class="w3-panel w3-card w3-hover-shadow w3-center" style="border-radius: 5px; width: 200px;height: 250px;">
+                <a href="/product/<%= p.category %>/<%= p.slug %>">
+                    <img src="/product_images/<%= p.id %>/<%= p.images %>" alt="Avatar" style="width:100%; height: 150px;">
+                </a>
+                <h4><b><%= p.title %></b></h4>
+                <p><%= parseFloat(p.price).toFixed(2) %>/=</p>
+                <a href="/product/<%=p.category %>/<%= p.slug %>">View Details</a>
+            </div>
+        </div>
+    <%}%>
+
+<% include _layouts/footer %>

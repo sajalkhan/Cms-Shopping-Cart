@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" />
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title> <%= title %> </title>
+
+  </head>
+
+  <body>
+
+      <div class="ajaxbg">
+          <div class="ajaxinner">
+              <h3>You are now being redirected to paypal...</h3>
+              <img src="/images/ajax-loader.gif" alt=""/>
+          </div>
+      </div>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">CmsShoppingCart</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <% for( var page of pages) {%>
+              <% if(page.slug == "home") {%>
+                  <li><a class="nav-link" href="/"><%= page.title %></a></li>
+              <%} else if(page.slug == "product"){%>
+                  <li><a class="nav-link" href="/product">Product</a></li>
+              <% } else {%>
+                <li><a class="nav-link" href="/<%= page.slug %>"><%= page.title %></a></li>
+              <% }%>
+          <% } %>
+        </ul>
+
+        <ul class="navbar-nav navbar-right">
+          <li>
+            <a href="/cart/checkout" class="nav-link">My Cart (
+              <% if (typeof cart !== "undefined") {%>
+                <%= cart.length %>
+              <%}else {%>
+                0
+              <%}%>
+            )</a>
+          </li>
+
+          <% if (user) { %>
+            <li><a class="nav-link" href="/user/logout">Hi, <%= user.username %> ( logout )</a></li>
+            <% } else {%>
+            <li><a class="nav-link" href="/user/register">Register</a></li>
+            <li><a class="nav-link" href="/user/login">Log in</a></li>
+            <% } %>
+            <% if (user && user.admin == 1) { %>
+            <li><a class="nav-link" href="/admin/pages">Admin Area</a></li>
+          <% }%>
+
+
+        </ul>
+      </div>
+    </nav>
+
+    <div role="main" class="container">
+    
+      <%- messages('messages', locals) %>  <!-- show all alert message from here via req.flash() -->
+
+      <!--  here i show error alert-->
+      <% if(errors) {%>
+        <% for(var error of errors) { %>
+          <div class="alert alert-danger">
+            <%= error.msg %>
+          </div>
+        <% }; %>
+      <% }%>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+              <h3>Categories</h3>
+              <ul class="list-group">
+                <li class="list-group-item"><a href="/product">All Product</a></li>
+                <% for(var ct of category) {%>
+                  <li class="list-group-item"><a href="/product/<%= ct.slug %>"><%= ct.title %></a></li>
+                <%}%>
+              </ul>
+            </div>
+
+            <div class="col-xs-12 col-md-1"></div>
+            <div class="col-xs-12 col-md-8">
+
+      

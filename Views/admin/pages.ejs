@@ -1,0 +1,58 @@
+<%- include('../_layouts/adminHeader') %>
+
+<h2 class="page-title">Page</h2>
+<a href="/admin/pages/add-page" class="btn btn-primary">Add a new page</a>
+<br><br>
+
+<table class="table table-striped">
+    <thead>
+        <tr class="home">
+            <th>Title</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% for(var page of pages){ %>
+        <tr id="id_<%= page._id %>" class="<%= page.slug %>">
+            <td><%= page.title %></td>
+            <td><a href="/admin/pages/EditPage/<%=page.id %>">Edit</a></td>
+            <% if(page.slug == "home") {%>
+            <td></td>
+            <% }else{%>
+            <td><a href="/admin/pages/DeletePage/<%=page.id %>">Delete</a></td>
+            <% }%>
+        </tr>
+        <% }%>
+    </tbody>
+</table>
+
+<%- include('../_layouts/adminFooter') %>
+
+
+<!-- 
+Learn more: Link-1: http://www.expertphp.in/article/jquery-bootstrap-table-row-draggable-and-sortable-resizable-with-example
+            Link-2: https://shareurcodes.com/blog/create-drag-and-droppable-datatables-using-jquery-ui-sortable-in-laravel
+-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script> 
+
+
+<script>
+
+    $('tbody').sortable({
+        items:"tr:not('.home')",  // here we said that which item will be sortable
+        cursor: 'move',
+        opacity: 0.3,
+        update:function(){
+            var ids = $('tbody').sortable("serialize");
+            var url = "/admin/pages/reorder-pages";
+
+            $.post(url,ids); // ajax call
+        }
+    });
+
+</script>
