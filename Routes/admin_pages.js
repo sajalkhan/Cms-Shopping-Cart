@@ -78,10 +78,10 @@ router.get('/DeletePage/:id', isAdmin, async (req,res)=>{
 /**
  * Post add pages 
  */
-router.post('/add-page',[
+router.post('/add-page', [
     check('title','Title must have a value').not().isEmpty(),     //check validation
     check('content','Content must have a value').not().isEmpty()
-] ,isAdmin, (req,res)=>{
+], (req,res)=>{
 
     var title = req.body.title;
     var slug = req.body.slug.toLowerCase().replace('/\s+/g','-');
@@ -136,7 +136,7 @@ router.post('/add-page',[
 router.post('/EditPage/:id', [
     check('title', 'Title must have a value').not().isEmpty(),     //check validation
     check('content', 'Content must have a value').not().isEmpty()
-],isAdmin, async (req, res) => {
+], async (req, res) => {
 
     var title = req.body.title;
     var slug = req.body.slug.toLowerCase().replace('/\s+/g', '-');
