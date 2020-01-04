@@ -5,6 +5,7 @@ const session = require('express-session');
 const { check, validationResult } = require('express-validator');
 const fileUpload = require('express-fileupload');
 var passport = require('passport');
+const mongoStore = require('connect-mongo')(session);
 
 //init app
 const app = express();
@@ -28,12 +29,22 @@ app.use(bodyParser.json());
 app.use(fileUpload());
 
 //Session middleware
-app.use(session({
-    secret: 'keyboard cat',
-    resave: true,
+if (process.env.NODE_ENV == 'production') {
+  app.use(session({
+    secret: 'testSession',
+    resave: false,
+    saveUninitialized: false,
+    store: new mongoStore({
+      mongooseConnection: mongoose.connection
+    })
+  }));
+} else {
+  app.use(session({
+    secret: 'testSession',
+    resave: false,
     saveUninitialized: true
-    // cookie: { secure: true }
-}));
+  }));
+}
 
 // Express messages middleware
 app.use(require('connect-flash')());
