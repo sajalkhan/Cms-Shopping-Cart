@@ -82,7 +82,7 @@ router.get('/DeleteCategory/:id',isAdmin, async (req,res)=>{
  */
 router.post('/addCategory',[
     check('title','Title must have a value').not().isEmpty()     //check validation
-] ,isAdmin, (req,res)=>{
+], (req,res)=>{
 
     var title = req.body.title;
     var slug = req.body.slug.toLowerCase().replace('/\s+/g','-');
@@ -131,7 +131,7 @@ router.post('/addCategory',[
  */
 router.post('/EditCategory/:id', [
     check('title', 'Title must have a value').not().isEmpty()     //check validation
-],isAdmin, async (req, res) => {
+], async (req, res) => {
 
     var title = req.body.title;
     var slug = req.body.slug.toLowerCase().replace('/\s+/g', '-');
