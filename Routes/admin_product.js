@@ -149,7 +149,7 @@ router.post('/addProduct', [
     check('title', 'Title must have a value').not().isEmpty(),
     check('description', 'Description must have a value').not().isEmpty(),
     check('price', 'Price must have a value').isDecimal()     //check validation
-], isAdmin, async (req, res) => {
+], async (req, res) => {
 
     var title = req.body.title;
     var desc = req.body.description;
@@ -253,7 +253,7 @@ router.post('/EditProduct/:id', [
     check('title', 'Title must have a value').not().isEmpty(),
     check('description', 'Description must have a value').not().isEmpty(),
     check('price', 'Price must have a value').isDecimal()     //check validation
-], isAdmin, async (req, res) => {
+], async (req, res) => {
 
     var id = req.params.id;
     var title = req.body.title;
@@ -347,7 +347,7 @@ router.post('/EditProduct/:id', [
 /**
  * Post Gallery images
  */
-router.post('/productGallery/:id', isAdmin, (req, res) => {
+router.post('/productGallery/:id', (req, res) => {
 
     var id = req.params.id;
     var productImage = req.files.file;
