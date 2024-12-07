@@ -24,7 +24,7 @@
     "express-validator": "^6.2.0",
     "fs-extra": "^8.1.0",
     "mkdirp": "^0.5.1",
-    "mongoose": "^5.7.3",
+    "mongoose": "^5.7.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "resize-img": "^2.0.0"
